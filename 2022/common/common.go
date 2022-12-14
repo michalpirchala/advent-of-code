@@ -54,26 +54,44 @@ func (p *Position) MoveTo(p2 Position) {
 	p.R = p2.R
 	p.C = p2.C
 }
-func (p *Position) Up() Position {
-	return Position{p.R + 1, p.C}
+func (p *Position) Up() *Position {
+	return &Position{p.R + 1, p.C}
 }
-func (p *Position) Down() Position {
-	return Position{p.R - 1, p.C}
+func (p *Position) Down() *Position {
+	return &Position{p.R - 1, p.C}
 }
 func (p *Position) Equals(p2 Position) bool {
 	return p.R == p2.R && p.C == p2.C
 }
-func (p *Position) UpR() Position {
-	return Position{p.R - 1, p.C}
+func (p *Position) UpR() *Position {
+	return &Position{p.R - 1, p.C}
 }
-func (p *Position) DownR() Position {
-	return Position{p.R + 1, p.C}
+func (p *Position) DownR() *Position {
+	return &Position{p.R + 1, p.C}
 }
-func (p *Position) Left() Position {
-	return Position{p.R, p.C - 1}
+func (p *Position) Left() *Position {
+	return &Position{p.R, p.C - 1}
 }
-func (p *Position) Right() Position {
-	return Position{p.R, p.C + 1}
+func (p *Position) Right() *Position {
+	return &Position{p.R, p.C + 1}
+}
+func (p *Position) ForEachUntil(c Position, f func(int, int)) {
+	if p.R == c.R {
+		a, b := Min(p.C, c.C), Max(p.C, c.C)
+		for a <= b {
+			f(p.R, a)
+			a++
+		}
+		return
+	} else if p.C == c.C {
+		a, b := Min(p.R, c.R), Max(p.R, c.R)
+		for a <= b {
+			f(a, p.C)
+			a++
+		}
+		return
+	}
+	panic("not for diagonally positioned")
 }
 
 func SliceStrToInt(s []string) (ints []int) {
@@ -85,4 +103,9 @@ func SliceStrToInt(s []string) (ints []int) {
 		ints = append(ints, val)
 	}
 	return
+}
+
+func StrToInt(s string) int {
+	i, _ := strconv.Atoi(s)
+	return i
 }

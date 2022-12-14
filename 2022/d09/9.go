@@ -73,13 +73,13 @@ func P2() {
 			//move head
 			switch instr[0] {
 			case "U":
-				rope[0] = rope[0].Up()
+				rope[0] = *rope[0].Up()
 			case "D":
-				rope[0] = rope[0].Down()
+				rope[0] = *rope[0].Down()
 			case "R":
-				rope[0] = rope[0].Right()
+				rope[0] = *rope[0].Right()
 			case "L":
-				rope[0] = rope[0].Left()
+				rope[0] = *rope[0].Left()
 			}
 			// move everything but head
 			for a := 0; a < tail; a++ {
