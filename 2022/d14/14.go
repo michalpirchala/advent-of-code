@@ -6,18 +6,9 @@ import (
 	"strings"
 )
 
-type BoolMap map[int]map[int]bool
-
-func (mapa BoolMap) AssignToMap(r int, c int) {
-	if _, ok := mapa[r]; !ok {
-		mapa[r] = make(map[int]bool)
-	}
-	mapa[r][c] = true
-}
-
 func P1() {
 	rockPos := make(map[int]int)
-	mapa := make(BoolMap)
+	mapa := make(common.BoolMap)
 	common.FileIter("14", func(s string) {
 		dirs := strings.Split(s, " -> ")
 
@@ -59,7 +50,7 @@ SandLoop:
 	fmt.Println(n)
 }
 
-func fall(mapa BoolMap, p *common.Position) *common.Position {
+func fall(mapa common.BoolMap, p *common.Position) *common.Position {
 	dirs := []*common.Position{p.DownR(), p.DownR().Left(), p.DownR().Right()}
 	for _, dir := range dirs {
 		if !mapa[dir.R][dir.C] {
@@ -70,7 +61,7 @@ func fall(mapa BoolMap, p *common.Position) *common.Position {
 }
 
 func P2() {
-	mapa := make(BoolMap)
+	mapa := make(common.BoolMap)
 	h := 0
 	common.FileIter("14", func(s string) {
 		dirs := strings.Split(s, " -> ")
@@ -114,7 +105,7 @@ SandLoop:
 	fmt.Println(n)
 }
 
-func fall2(mapa BoolMap, p *common.Position, h int) *common.Position {
+func fall2(mapa common.BoolMap, p *common.Position, h int) *common.Position {
 	dirs := []*common.Position{p.DownR(), p.DownR().Left(), p.DownR().Right()}
 	for _, dir := range dirs {
 		if !mapa[dir.R][dir.C] && dir.R < h {

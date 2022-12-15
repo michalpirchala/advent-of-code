@@ -93,6 +93,9 @@ func (p *Position) ForEachUntil(c Position, f func(int, int)) {
 	}
 	panic("not for diagonally positioned")
 }
+func (p *Position) MHDist(c *Position) int {
+	return Abs(p.R-c.R) + Abs(p.C-c.C)
+}
 
 func SliceStrToInt(s []string) (ints []int) {
 	for _, v := range s {
@@ -108,4 +111,13 @@ func SliceStrToInt(s []string) (ints []int) {
 func StrToInt(s string) int {
 	i, _ := strconv.Atoi(s)
 	return i
+}
+
+type BoolMap map[int]map[int]bool
+
+func (mapa BoolMap) AssignToMap(r int, c int) {
+	if _, ok := mapa[r]; !ok {
+		mapa[r] = make(map[int]bool)
+	}
+	mapa[r][c] = true
 }
