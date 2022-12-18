@@ -30,7 +30,7 @@ func P1() {
 	fmt.Println(len(covered) - len(bar))
 }
 
-func P3() {
+func P2() {
 	mapa := make(common.BoolMap)
 	sensors := make(map[common.Position]int)
 	const LIMIT = 4000000
