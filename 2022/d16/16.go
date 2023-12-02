@@ -33,7 +33,7 @@ func P1() {
 		valves[name] = valve
 	})
 
-	for valve, _ := range valves {
+	for valve := range valves {
 		if valve != "AA" && valves[valve].rate == 0 {
 			continue
 		}

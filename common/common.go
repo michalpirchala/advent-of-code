@@ -2,12 +2,20 @@ package common
 
 import (
 	"bufio"
+	"fmt"
 	"os"
 	"strconv"
 )
 
 func FileIter(num string, f func(string)) {
-	file, _ := os.Open("inputs/" + num + ".txt")
+	FileIt("inputs/"+num+".txt", f)
+}
+
+func FileIt(filename string, f func(string)) {
+	file, err := os.Open(filename)
+	if err != nil {
+		fmt.Println(err)
+	}
 	scan := bufio.NewScanner(file)
 	scan.Split(bufio.ScanLines)
 
